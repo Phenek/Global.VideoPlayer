@@ -5,14 +5,17 @@ using AVFoundation;
 using AVKit;
 using CoreMedia;
 using Foundation;
-using Global.VideoPlayer.iOS.iOS;
+using Global.VideoPlayer;
+using Global.VideoPlayer.iOS;
+using Xamarin.Forms.Platform.iOS;
 using UIKit;
 using Xamarin.Forms;
+
 
 [assembly: ExportRenderer(typeof(VideoPlayer),
     typeof(VideoPlayerRenderer))]
 
-namespace Global.VideoPlayer.iOS.iOS
+namespace Global.VideoPlayer.iOS
 {
     public class VideoPlayerRenderer : ViewRenderer<VideoPlayer, UIView>
     {
@@ -68,7 +71,7 @@ namespace Global.VideoPlayer.iOS.iOS
         {
             base.Dispose(disposing);
 
-            if (_player != null) _player.ReplaceCurrentItemWithPlayerItem(null);
+            _player?.ReplaceCurrentItemWithPlayerItem(null);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -108,29 +111,36 @@ namespace Global.VideoPlayer.iOS.iOS
         {
             AVAsset asset = null;
 
-            if (Element.Source is UriVideoSource)
+            switch (Element.Source)
             {
-                var uri = (Element.Source as UriVideoSource).Uri;
-
-                if (!string.IsNullOrWhiteSpace(uri)) asset = AVAsset.FromUrl(new NSUrl(uri));
-            }
-            else if (Element.Source is FileVideoSource)
-            {
-                var uri = (Element.Source as FileVideoSource).File;
-
-                if (!string.IsNullOrWhiteSpace(uri)) asset = AVAsset.FromUrl(new NSUrl(uri));
-            }
-            else if (Element.Source is ResourceVideoSource)
-            {
-                var path = (Element.Source as ResourceVideoSource).Path;
-
-                if (!string.IsNullOrWhiteSpace(path))
+                case UriVideoSource source:
                 {
-                    var directory = Path.GetDirectoryName(path);
-                    var filename = Path.GetFileNameWithoutExtension(path);
-                    var extension = Path.GetExtension(path).Substring(1);
-                    var url = NSBundle.MainBundle.GetUrlForResource(filename, extension, directory);
-                    asset = AVAsset.FromUrl(url);
+                    var uri = source.Uri;
+
+                    if (!string.IsNullOrWhiteSpace(uri)) asset = AVAsset.FromUrl(new NSUrl(uri));
+                    break;
+                }
+                case FileVideoSource source:
+                {
+                    var uri = source.File;
+
+                    if (!string.IsNullOrWhiteSpace(uri)) asset = AVAsset.FromUrl(new NSUrl(uri));
+                    break;
+                }
+                case ResourceVideoSource source:
+                {
+                    var path = source.Path;
+
+                    if (!string.IsNullOrWhiteSpace(path))
+                    {
+                        var directory = Path.GetDirectoryName(path);
+                        var filename = Path.GetFileNameWithoutExtension(path);
+                        var extension = Path.GetExtension(path).Substring(1);
+                        var url = NSBundle.MainBundle.GetUrlForResource(filename, extension, directory);
+                        asset = AVAsset.FromUrl(url);
+                    }
+
+                    break;
                 }
             }
 
@@ -175,12 +185,11 @@ namespace Global.VideoPlayer.iOS.iOS
 
             ((IVideoPlayerController) Element).Status = videoStatus;
 
-            if (_playerItem != null)
-            {
-                ((IVideoPlayerController) Element).Duration = ConvertTime(_playerItem.Duration);
-                ((IElementController) Element).SetValueFromRenderer(VideoPlayer.PositionProperty,
-                    ConvertTime(_playerItem.CurrentTime));
-            }
+            if (_playerItem == null) return;
+            
+            ((IVideoPlayerController) Element).Duration = ConvertTime(_playerItem.Duration);
+            ((IElementController) Element).SetValueFromRenderer(VideoPlayer.PositionProperty,
+                ConvertTime(_playerItem.CurrentTime));
         }
 
         private TimeSpan ConvertTime(CMTime cmTime)
@@ -190,11 +199,10 @@ namespace Global.VideoPlayer.iOS.iOS
 
         private void VideoDidFinishPlaying(NSNotification obj)
         {
-            if (Element.Loop)
-            {
-                _player.Seek(new CMTime(0, 1));
-                _player.Play();
-            }
+            if (!Element.Loop) return;
+            
+            _player.Seek(new CMTime(0, 1));
+            _player.Play();
         }
 
         // Event handlers to implement methods

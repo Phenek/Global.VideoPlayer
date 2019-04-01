@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:video="clr-namespace:Global.VideoPlayer;assembly=Global.VideoPlayer"
+             x:Class="Global.VideoPlayer.Sample.BindToVideoPlayerPage"
+             Title="Bind to VideoPlayer">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <video:VideoPlayer x:Name="videoPlayer"
+                           Grid.Row="0"
+                           AutoPlay="true"
+                           Source="{Binding Source={x:Reference listView},
+                                            Path=SelectedItem.VideoSource}" />
+
+        <ListView x:Name="listView"
+                  Grid.Row="1">
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type video:VideoInfo}">
+                    <video:VideoInfo DisplayName="Elephant's Dream"
+                                     VideoSource="{StaticResource ElephantsDream}" />
+
+                    <video:VideoInfo DisplayName="Big Buck Bunny"
+                                     VideoSource="{StaticResource BigBuckBunny}" />
+
+                    <video:VideoInfo DisplayName="Sintel"
+                                     VideoSource="{StaticResource Sintel}" />
+                </x:Array>
+            </ListView.ItemsSource>
+        </ListView>
+    </Grid>
+</ContentPage>

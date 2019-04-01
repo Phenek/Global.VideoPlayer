@@ -15,9 +15,10 @@ namespace Global.VideoPlayer.Droid
 
         public static void Init(Activity activity, Bundle bundle)
         {
+            Current = activity;
         }
 
-        public void OnVideoPickerResult(int requestCode, Result resultCode, Intent data)
+        public static void OnVideoPickerResult(int requestCode, Result resultCode, Intent data)
         {
             if (requestCode == PickImageId)
             {

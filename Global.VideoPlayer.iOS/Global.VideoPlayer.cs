@@ -1,10 +1,10 @@
 ﻿using System;
 namespace Global.VideoPlayer.iOS
 {
-	public class Global
+    public static class Global
     {
-		public Global()
-		{
-		}
-	}
+        public static void Init()
+        {
+        }
+    }
 }

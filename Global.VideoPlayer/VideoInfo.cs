@@ -1,6 +1,4 @@
-﻿using Global.VideoPlayer;
-
-namespace VideoPlayerDemos
+﻿namespace Global.VideoPlayer
 {
     public class VideoInfo
     {

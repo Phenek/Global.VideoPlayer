@@ -8,6 +8,7 @@ using Android.Widget;
 using Global.VideoPlayer;
 using Global.VideoPlayer.Droid;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 using Uri = Android.Net.Uri;
 
 [assembly: ExportRenderer(typeof(VideoPlayer),

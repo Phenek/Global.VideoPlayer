@@ -51,11 +51,13 @@ namespace Global.VideoPlayer
 
         public VideoPlayer()
         {
+
             Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
             {
                 UpdateStatus?.Invoke(this, EventArgs.Empty);
                 return true;
             });
+
         }
 
         public VideoAspect Aspect
