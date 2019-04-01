@@ -12,7 +12,6 @@ namespace Global.VideoPlayer
             return Uri.TryCreate(value, UriKind.Absolute, out var uri) && uri.Scheme != "file"
                 ? VideoSource.FromUri(value)
                 : VideoSource.FromResource(value);
-
         }
     }
 }

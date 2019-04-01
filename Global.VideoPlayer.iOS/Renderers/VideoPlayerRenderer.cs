@@ -7,26 +7,26 @@ using CoreMedia;
 using Foundation;
 using Global.VideoPlayer;
 using Global.VideoPlayer.iOS;
-using Xamarin.Forms.Platform.iOS;
 using UIKit;
 using Xamarin.Forms;
-
+using Xamarin.Forms.Platform.iOS;
+using VideoPlayer = Global.VideoPlayer.VideoPlayer;
 
 [assembly: ExportRenderer(typeof(VideoPlayer),
     typeof(VideoPlayerRenderer))]
 
 namespace Global.VideoPlayer.iOS
 {
-    public class VideoPlayerRenderer : ViewRenderer<VideoPlayer, UIView>
+    public class VideoPlayerRenderer : ViewRenderer<Global.VideoPlayer.VideoPlayer, UIView>
     {
-        private AVPlayerViewController _playerViewController; // solely for ViewController property
         private AVPlayer _player;
         private AVPlayerItem _playerItem;
+        private AVPlayerViewController _playerViewController; // solely for ViewController property
         private NSObject _videoEndNotificationToken;
 
         public override UIViewController ViewController => _playerViewController;
 
-        protected override void OnElementChanged(ElementChangedEventArgs<VideoPlayer> args)
+        protected override void OnElementChanged(ElementChangedEventArgs<Global.VideoPlayer.VideoPlayer> args)
         {
             base.OnElementChanged(args);
 
@@ -78,18 +78,18 @@ namespace Global.VideoPlayer.iOS
         {
             base.OnElementPropertyChanged(sender, args);
 
-            if (args.PropertyName == VideoPlayer.TimeToEndProperty.PropertyName)
+            if (args.PropertyName == Global.VideoPlayer.VideoPlayer.TimeToEndProperty.PropertyName)
                 return;
 
-            if (args.PropertyName == VideoPlayer.NativeControlsProperty.PropertyName)
+            if (args.PropertyName == Global.VideoPlayer.VideoPlayer.NativeControlsProperty.PropertyName)
             {
                 SetAreTransportControlsEnabled();
             }
-            else if (args.PropertyName == VideoPlayer.SourceProperty.PropertyName)
+            else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.SourceProperty.PropertyName)
             {
                 SetSource();
             }
-            else if (args.PropertyName == VideoPlayer.PositionProperty.PropertyName)
+            else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.PositionProperty.PropertyName)
             {
                 var controlPosition = ConvertTime(_player.CurrentTime);
 
@@ -186,9 +186,9 @@ namespace Global.VideoPlayer.iOS
             ((IVideoPlayerController) Element).Status = videoStatus;
 
             if (_playerItem == null) return;
-            
+
             ((IVideoPlayerController) Element).Duration = ConvertTime(_playerItem.Duration);
-            ((IElementController) Element).SetValueFromRenderer(VideoPlayer.PositionProperty,
+            ((IElementController) Element).SetValueFromRenderer(Global.VideoPlayer.VideoPlayer.PositionProperty,
                 ConvertTime(_playerItem.CurrentTime));
         }
 
@@ -200,7 +200,7 @@ namespace Global.VideoPlayer.iOS
         private void VideoDidFinishPlaying(NSNotification obj)
         {
             if (!Element.Loop) return;
-            
+
             _player.Seek(new CMTime(0, 1));
             _player.Play();
         }

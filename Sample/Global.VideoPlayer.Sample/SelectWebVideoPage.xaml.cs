@@ -12,9 +12,9 @@ namespace Global.VideoPlayer.Sample
         public void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             if (args.SelectedItem == null) return;
-            
-            var key = ((string)args.SelectedItem).Replace(" ", "").Replace("'", "");
-            videoPlayer.Source = (UriVideoSource)Application.Current.Resources[key];
+
+            var key = ((string) args.SelectedItem).Replace(" ", "").Replace("'", "");
+            videoPlayer.Source = (UriVideoSource) Application.Current.Resources[key];
         }
     }
 }

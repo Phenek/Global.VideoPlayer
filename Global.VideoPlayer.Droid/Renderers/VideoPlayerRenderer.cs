@@ -10,13 +10,14 @@ using Global.VideoPlayer.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Uri = Android.Net.Uri;
+using VideoPlayer = Global.VideoPlayer.VideoPlayer;
 
 [assembly: ExportRenderer(typeof(VideoPlayer),
     typeof(VideoPlayerRenderer))]
 
 namespace Global.VideoPlayer.Droid
 {
-    public class VideoPlayerRenderer : ViewRenderer<VideoPlayer, FrameLayout>
+    public class VideoPlayerRenderer : ViewRenderer<Global.VideoPlayer.VideoPlayer, FrameLayout>
     {
         private bool _isPrepared;
         private MediaController _mediaController; // Used to display transport controls
@@ -28,7 +29,7 @@ namespace Global.VideoPlayer.Droid
         {
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<VideoPlayer> args)
+        protected override void OnElementChanged(ElementChangedEventArgs<Global.VideoPlayer.VideoPlayer> args)
         {
             base.OnElementChanged(args);
 
@@ -145,11 +146,11 @@ namespace Global.VideoPlayer.Droid
         {
             base.OnElementPropertyChanged(sender, args);
 
-            if (args.PropertyName == VideoPlayer.NativeControlsProperty.PropertyName)
+            if (args.PropertyName == Global.VideoPlayer.VideoPlayer.NativeControlsProperty.PropertyName)
                 SetAreTransportControlsEnabled();
-            else if (args.PropertyName == VideoPlayer.SourceProperty.PropertyName)
+            else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.SourceProperty.PropertyName)
                 SetSource();
-            else if (args.PropertyName == VideoPlayer.PositionProperty.PropertyName)
+            else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.PositionProperty.PropertyName)
                 if (Math.Abs(_videoView.CurrentPosition - Element.Position.TotalMilliseconds) > 1000)
                     _videoView.SeekTo((int) Element.Position.TotalMilliseconds);
         }
@@ -227,7 +228,7 @@ namespace Global.VideoPlayer.Droid
 
             // Set Position property
             var timeSpan = TimeSpan.FromMilliseconds(_videoView.CurrentPosition);
-            ((IElementController) Element).SetValueFromRenderer(VideoPlayer.PositionProperty, timeSpan);
+            ((IElementController) Element).SetValueFromRenderer(Global.VideoPlayer.VideoPlayer.PositionProperty, timeSpan);
         }
 
         // Event handlers to implement methods

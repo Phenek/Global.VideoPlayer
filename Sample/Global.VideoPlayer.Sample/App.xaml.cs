@@ -1,8 +1,8 @@
-﻿using Global.VideoPlayer.Sample;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace Global.VideoPlayer.Sample
 {
     public partial class App : Application
@@ -34,61 +34,41 @@ namespace Global.VideoPlayer.Sample
     {
         public StartPage()
         {
-            var toBindToVideoPlayerPageBtn = new Button { Text = "Bind To Video Player Page" };
-            toBindToVideoPlayerPageBtn.Clicked += (sender, e) =>
-            {
-                this.Navigation.PushAsync(new BindToVideoPlayerPage());
-            };
+            var toBindToVideoPlayerPageBtn = new Button {Text = "Bind To Video Player Page"};
+            toBindToVideoPlayerPageBtn.Clicked += (sender, e) => { Navigation.PushAsync(new BindToVideoPlayerPage()); };
 
-            var toCustomPositionBarPageBtn = new Button { Text = "Custom Position Bar Page" };
-            toCustomPositionBarPageBtn.Clicked += (sender, e) =>
-            {
-                this.Navigation.PushAsync(new CustomPositionBarPage());
-            };
+            var toCustomPositionBarPageBtn = new Button {Text = "Custom Position Bar Page"};
+            toCustomPositionBarPageBtn.Clicked += (sender, e) => { Navigation.PushAsync(new CustomPositionBarPage()); };
 
-            var toCustomTransportPageBtn = new Button { Text = "Custom Transport Page" };
-            toCustomTransportPageBtn.Clicked += (sender, e) =>
-            {
-                this.Navigation.PushAsync(new CustomTransportPage());
-            };
+            var toCustomTransportPageBtn = new Button {Text = "Custom Transport Page"};
+            toCustomTransportPageBtn.Clicked += (sender, e) => { Navigation.PushAsync(new CustomTransportPage()); };
 
-            var toPlayLibraryVideoPageBtn = new Button { Text = "Play Library Video Page" };
-            toPlayLibraryVideoPageBtn.Clicked += (sender, e) =>
-            {
-                this.Navigation.PushAsync(new PlayLibraryVideoPage());
-            };
+            var toPlayLibraryVideoPageBtn = new Button {Text = "Play Library Video Page"};
+            toPlayLibraryVideoPageBtn.Clicked += (sender, e) => { Navigation.PushAsync(new PlayLibraryVideoPage()); };
 
-            var toPlayVideoResourcePageBtn = new Button { Text = "Play Video Resource Page" };
-            toPlayVideoResourcePageBtn.Clicked += (sender, e) =>
-            {
-                this.Navigation.PushAsync(new PlayVideoResourcePage());
-            };
+            var toPlayVideoResourcePageBtn = new Button {Text = "Play Video Resource Page"};
+            toPlayVideoResourcePageBtn.Clicked += (sender, e) => { Navigation.PushAsync(new PlayVideoResourcePage()); };
 
-            var toPlayWebVideoPageBtn = new Button { Text = "Play Web Video Page" };
-            toPlayWebVideoPageBtn.Clicked += (sender, e) =>
-            {
-                this.Navigation.PushAsync(new PlayWebVideoPage());
-            };
+            var toPlayWebVideoPageBtn = new Button {Text = "Play Web Video Page"};
+            toPlayWebVideoPageBtn.Clicked += (sender, e) => { Navigation.PushAsync(new PlayWebVideoPage()); };
 
 
-            var toSelectWebVideoPageBtn = new Button { Text = "Select Web Video Page" };
-            toSelectWebVideoPageBtn.Clicked += (sender, e) =>
-            {
-                this.Navigation.PushAsync(new SelectWebVideoPage());
-            };
+            var toSelectWebVideoPageBtn = new Button {Text = "Select Web Video Page"};
+            toSelectWebVideoPageBtn.Clicked += (sender, e) => { Navigation.PushAsync(new SelectWebVideoPage()); };
 
             Content = new ScrollView
             {
                 Content = new StackLayout
                 {
-                    Children = {
-                    toBindToVideoPlayerPageBtn,
-                    toCustomPositionBarPageBtn,
-                    toCustomTransportPageBtn,
-                    toPlayLibraryVideoPageBtn,
-                    toPlayVideoResourcePageBtn,
-                    toPlayWebVideoPageBtn,
-                    toSelectWebVideoPageBtn
+                    Children =
+                    {
+                        toBindToVideoPlayerPageBtn,
+                        toCustomPositionBarPageBtn,
+                        toCustomTransportPageBtn,
+                        toPlayLibraryVideoPageBtn,
+                        toPlayVideoResourcePageBtn,
+                        toPlayWebVideoPageBtn,
+                        toSelectWebVideoPageBtn
                     }
                 }
             };

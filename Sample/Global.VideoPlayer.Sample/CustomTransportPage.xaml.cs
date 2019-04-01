@@ -10,19 +10,14 @@ namespace Global.VideoPlayer.Sample
             InitializeComponent();
         }
 
-        void OnPlayPauseButtonClicked(object sender, EventArgs args)
+        private void OnPlayPauseButtonClicked(object sender, EventArgs args)
         {
             if (videoPlayer.Status == VideoStatus.Playing)
-            {
                 videoPlayer.Pause();
-            }
-            else if (videoPlayer.Status == VideoStatus.Paused)
-            {
-                videoPlayer.Play();
-            }
+            else if (videoPlayer.Status == VideoStatus.Paused) videoPlayer.Play();
         }
 
-        void OnStopButtonClicked(object sender, EventArgs args)
+        private void OnStopButtonClicked(object sender, EventArgs args)
         {
             videoPlayer.Stop();
         }

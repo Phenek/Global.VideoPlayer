@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:video="clr-namespace:Global.VideoPlayer;assembly=Global.VideoPlayer"
@@ -15,7 +16,7 @@
                            Grid.Row="0"
                            NativeControls="False"
                            Source="{StaticResource ElephantsDream}" />
-        
+
         <ActivityIndicator Grid.Row="0"
                            Color="Gray"
                            IsVisible="False">
@@ -37,7 +38,7 @@
 
             <Label Text="{Binding Path=Position,
                                   StringFormat='{0:hh\\:mm\\:ss}'}"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="Center" />
 
             <Button Text="&#x25B6;&#xFE0F; Play"
                     HorizontalOptions="CenterAndExpand"
@@ -77,7 +78,7 @@
         <video:PositionSlider Grid.Row="2"
                               Margin="10, 0, 10, 10"
                               BindingContext="{x:Reference videoPlayer}"
-                              Duration="{Binding Duration}"           
+                              Duration="{Binding Duration}"
                               Position="{Binding Position}">
             <video:PositionSlider.Triggers>
                 <DataTrigger TargetType="video:PositionSlider"

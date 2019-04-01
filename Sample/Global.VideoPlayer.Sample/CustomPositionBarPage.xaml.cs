@@ -10,7 +10,7 @@ namespace Global.VideoPlayer.Sample
             InitializeComponent();
         }
 
-        void OnPlayPauseButtonClicked(object sender, EventArgs args)
+        private void OnPlayPauseButtonClicked(object sender, EventArgs args)
         {
             switch (videoPlayer.Status)
             {
@@ -27,7 +27,7 @@ namespace Global.VideoPlayer.Sample
             }
         }
 
-        void OnStopButtonClicked(object sender, EventArgs args)
+        private void OnStopButtonClicked(object sender, EventArgs args)
         {
             videoPlayer.Stop();
         }

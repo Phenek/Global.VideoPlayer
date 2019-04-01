@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace Global.VideoPlayer.Sample.iOS
 {
@@ -11,7 +9,7 @@ namespace Global.VideoPlayer.Sample.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public class AppDelegate : FormsApplicationDelegate
     {
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -22,9 +20,9 @@ namespace Global.VideoPlayer.Sample.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+            Forms.Init();
 
-            Global.VideoPlayer.iOS.Global.Init();
+            Global.VideoPlayer.iOS.VideoPlayer.Init();
 
             LoadApplication(new App());
 

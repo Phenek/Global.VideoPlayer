@@ -1,17 +1,15 @@
-﻿using System;
-
-using Android.App;
-using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.OS;
+﻿using Android.App;
 using Android.Content;
+using Android.Content.PM;
+using Android.OS;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 namespace Global.VideoPlayer.Sample.Droid
 {
-    [Activity(Label = "Global.VideoPlayer.Sample", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    [Activity(Label = "Global.VideoPlayer.Sample", Icon = "@mipmap/icon", Theme = "@style/MainTheme",
+        MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -19,9 +17,9 @@ namespace Global.VideoPlayer.Sample.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-            global::Xamarin.Forms.Forms.Init(this, bundle);
+            Forms.Init(this, bundle);
 
-            Global.VideoPlayer.Droid.Global.Init(this, bundle);
+            Global.VideoPlayer.Droid.VideoPlayer.Init(this, bundle);
 
             LoadApplication(new App());
         }
@@ -29,7 +27,7 @@ namespace Global.VideoPlayer.Sample.Droid
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            Global.VideoPlayer.Droid.Global.OnVideoPickerResult(requestCode, resultCode, data);
+            Global.VideoPlayer.Droid.VideoPlayer.OnVideoPickerResult(requestCode, resultCode, data);
         }
     }
 }

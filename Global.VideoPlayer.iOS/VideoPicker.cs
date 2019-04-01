@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Global.VideoPlayer;
 using Global.VideoPlayer.iOS;
 using UIKit;
 using Xamarin.Forms;

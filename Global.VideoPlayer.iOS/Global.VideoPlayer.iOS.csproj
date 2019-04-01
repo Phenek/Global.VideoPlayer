@@ -93,7 +93,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\VideoPlayerRenderer.cs" />
     <Compile Include="VideoPicker.cs" />
-    <Compile Include="Global.VideoPlayer.cs" />
+    <Compile Include="VideoPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
