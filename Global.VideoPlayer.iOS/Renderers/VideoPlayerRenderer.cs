@@ -199,7 +199,7 @@ namespace Global.VideoPlayer.iOS
 
         private void VideoDidFinishPlaying(NSNotification obj)
         {
-            if (!Element.Loop) return;
+            if (!Element.Loop || _player == null) return;
 
             _player.Seek(new CMTime(0, 1));
             _player.Play();
@@ -208,16 +208,21 @@ namespace Global.VideoPlayer.iOS
         // Event handlers to implement methods
         private void OnPlayRequested(object sender, EventArgs args)
         {
+            if (_player == null) return;
             _player.Play();
         }
 
         private void OnPauseRequested(object sender, EventArgs args)
         {
+            if (_player == null) return;
+
             _player.Pause();
         }
 
         private void OnStopRequested(object sender, EventArgs args)
         {
+            if (_player == null) return;
+
             _player.Pause();
             _player.Seek(new CMTime(0, 1));
         }
