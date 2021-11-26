@@ -49,6 +49,8 @@ namespace Global.VideoPlayer.iOS
                     SetNativeControl(_playerViewController.View);
                 }
 
+                SetMute();
+                SetAudioFocus();
                 SetAreTransportControlsEnabled();
                 SetSource();
 
@@ -85,6 +87,10 @@ namespace Global.VideoPlayer.iOS
             {
                 SetAreTransportControlsEnabled();
             }
+            else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.MuteProperty.PropertyName)
+                SetMute();
+            else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.AudioFocusProperty.PropertyName)
+                SetAudioFocus();
             else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.SourceProperty.PropertyName)
             {
                 SetSource();
@@ -102,9 +108,33 @@ namespace Global.VideoPlayer.iOS
             }
         }
 
+        private void SetMute()
+        {
+            if (_player != null)
+            {
+                _player.Volume = Element.Mute ? 0 : 1;
+                _player.Muted = Element.Mute;
+            }
+        }
+
+        private void SetAudioFocus()
+        {
+            if (_player != null)
+            {
+                if (Element.AudioFocus)
+                {
+                    AVAudioSession.SharedInstance().SetCategory(AVAudioSessionCategory.SoloAmbient);
+                }
+                else
+                {
+                    AVAudioSession.SharedInstance().SetCategory(AVAudioSessionCategory.Ambient);
+                }
+            }
+        }
+
         private void SetAreTransportControlsEnabled()
         {
-            ((AVPlayerViewController) ViewController).ShowsPlaybackControls = Element.NativeControls;
+            _playerViewController.ShowsPlaybackControls = Element.NativeControls;
         }
 
         private void SetSource()

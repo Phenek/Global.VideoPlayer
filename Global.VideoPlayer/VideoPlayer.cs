@@ -24,6 +24,14 @@ namespace Global.VideoPlayer
         public static readonly BindableProperty AutoPlayProperty =
             BindableProperty.Create(nameof(AutoPlay), typeof(bool), typeof(VideoPlayer), true);
 
+        // Audio Focus property
+        public static readonly BindableProperty AudioFocusProperty =
+            BindableProperty.Create(nameof(AudioFocus), typeof(bool), typeof(VideoPlayer), true);
+
+        // Audio Focus property
+        public static readonly BindableProperty MuteProperty =
+            BindableProperty.Create(nameof(Mute), typeof(bool), typeof(VideoPlayer), false);
+
         // Status read-only property
         private static readonly BindablePropertyKey StatusPropertyKey =
             BindableProperty.CreateReadOnly(nameof(Status), typeof(VideoStatus), typeof(VideoPlayer),
@@ -87,6 +95,18 @@ namespace Global.VideoPlayer
         {
             set => SetValue(AutoPlayProperty, value);
             get => (bool) GetValue(AutoPlayProperty);
+        }
+
+        public bool AudioFocus
+        {
+            set => SetValue(AudioFocusProperty, value);
+            get => (bool)GetValue(AudioFocusProperty);
+        }
+
+        public bool Mute
+        {
+            set => SetValue(MuteProperty, value);
+            get => (bool)GetValue(MuteProperty);
         }
 
         public VideoStatus Status => (VideoStatus) GetValue(StatusProperty);

@@ -23,6 +23,7 @@ namespace Global.VideoPlayer.Droid
         private MediaController _mediaController; // Used to display transport controls
         private int _videoHeight;
         private VideoView _videoView;
+        private MediaPlayer _mediaPlayer;
         private int _videoWidth;
 
         public VideoPlayerRenderer(Context context) : base(context)
@@ -51,6 +52,7 @@ namespace Global.VideoPlayer.Droid
                     SetNativeControl(frameLayout);
                 }
 
+                SetAudioFocus();
                 SetAreTransportControlsEnabled();
                 SetSource();
 
@@ -128,8 +130,10 @@ namespace Global.VideoPlayer.Droid
         {
             if (sender is MediaPlayer mp)
             {
+                _mediaPlayer = mp;
                 Control.Visibility = ViewStates.Visible;
                 mp.Looping = Element.Loop;
+                SetMute();
                 _isPrepared = true;
                 ((IVideoPlayerController) Element).Duration = TimeSpan.FromMilliseconds(_videoView.Duration);
 
@@ -148,6 +152,10 @@ namespace Global.VideoPlayer.Droid
 
             if (args.PropertyName == Global.VideoPlayer.VideoPlayer.NativeControlsProperty.PropertyName)
                 SetAreTransportControlsEnabled();
+            else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.MuteProperty.PropertyName)
+                SetMute();
+            else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.AudioFocusProperty.PropertyName)
+                SetAudioFocus();
             else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.SourceProperty.PropertyName)
                 SetSource();
             else if (args.PropertyName == Global.VideoPlayer.VideoPlayer.PositionProperty.PropertyName)
@@ -172,6 +180,28 @@ namespace Global.VideoPlayer.Droid
                     _mediaController.SetMediaPlayer(null);
                     _mediaController = null;
                 }
+            }
+        }
+
+        private void SetMute()
+        {
+            if (_mediaPlayer != null)
+                if (Element.Mute)
+                    _mediaPlayer.SetVolume(0f, 0f);
+                else
+                    _mediaPlayer.SetVolume(1.0f, 1.0f);
+
+        }
+
+        private void SetAudioFocus()
+        {
+            if (_videoView != null && Element.AudioFocus)
+            {
+                _videoView.SetAudioFocusRequest(AudioFocus.Gain);
+            }
+            else
+            {
+                _videoView.SetAudioFocusRequest(AudioFocus.None);
             }
         }
 

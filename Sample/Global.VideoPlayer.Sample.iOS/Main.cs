@@ -11,5 +11,10 @@ namespace Global.VideoPlayer.Sample.iOS
             // you can specify it here.
             UIApplication.Main(args, null, "AppDelegate");
         }
+
+        //static void Main(string[] args)
+        //{
+        //    UIApplication.Main(args, typeof(App), typeof(AppDelegate));
+        //}
     }
 }

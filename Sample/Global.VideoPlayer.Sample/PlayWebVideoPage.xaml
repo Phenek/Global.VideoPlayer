@@ -6,6 +6,6 @@
              x:Class="Global.VideoPlayer.Sample.PlayWebVideoPage"
              Title="Play Web Video">
 
-    <video:VideoPlayer Source="https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4" />
+    <video:VideoPlayer Source="https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4" Mute="False"/>
 
 </ContentPage>

@@ -25,7 +25,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Global.VideoPlayer.Sample</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.Phenek.Global-VideoPlayer-Sample</string>
+	<string>phenek.Global.VideoPlayer</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
