@@ -18,16 +18,18 @@ A simple VideoPlayer for Xamarin.forms based on [Video Player Demos](https://dev
 Common video player operations are described here.
 
 | Property            | Description                                                                                                                                   |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| Aspect              | Defines how the video content is displayed. Default value is AspectFit. Use AspectFill for Background LoginSCreen                             |
-| Loop                | Specifies that the video will restart playing at the end. Default value is False.                                                             |
-| AutoPlay            | Specifies that the video will start playing as soon as it is ready. Default value is True.                                                    |
-| NativeControls      | Specifies that native controls should be displayed. Default value is True.                                                                    |
-| Source              | A local file path or remote URL to a video file.                                                                                              |
-| Position            | A read-only bindable playback time for the current video.                                                                                     |
-| Duration            | A read-only Field that provide the duration of the video                                                                                      |
-| TimeToEnd           | A read-only Field that provide the time until the end of the video.                                                                           |
-| State         	  | A read-only bindable property indicating the current state of the video player (NotReady, Playing, Pause)                                     |
+|---------------------|--------------------------------------------------------------------------------------------------------------------|
+| Aspect              | Defines how the video content is displayed. Default value is AspectFit. Use AspectFill for Background LoginSCreen  |
+| Loop                | Specifies that the video will restart playing at the end. Default value is False.                                  |
+| AutoPlay            | Specifies that the video will start playing as soon as it is ready. Default value is True.                         |
+| NativeControls      | Specifies that native controls should be displayed. Default value is True.                                         |
+| AudioFocus         	| Specifies if the video player should take the audio focus or not.                                                  |
+| Mute         	      | Specifies if the video player should be muted or not.                                                              |
+| Source              | A local file path or remote URL to a video file.                                                                   |
+| Position            | A read-only bindable playback time for the current video.                                                          |
+| Duration            | A read-only Field that provide the duration of the video                                                           |
+| TimeToEnd           | A read-only Field that provide the time until the end of the video.                                                |
+| State         	    | A read-only bindable property indicating the current state of the video player (NotReady, Playing, Pause)          |
 
 ## Samples
 The sample you can find here https://github.com/Phenek/Global.VideoPlayer/tree/master/Sample
