@@ -195,13 +195,20 @@ namespace Global.VideoPlayer.Droid
 
         private void SetAudioFocus()
         {
-            if (_videoView != null && Element.AudioFocus)
+            try
             {
-                _videoView.SetAudioFocusRequest(AudioFocus.Gain);
+                if (_videoView != null && Element.AudioFocus)
+                {
+                    _videoView.SetAudioFocusRequest(AudioFocus.Gain);
+                }
+                else
+                {
+                    _videoView.SetAudioFocusRequest(AudioFocus.None);
+                }
             }
-            else
+            catch
             {
-                _videoView.SetAudioFocusRequest(AudioFocus.None);
+
             }
         }
 
